@@ -27,7 +27,7 @@
 > Description
 - Permission체크 및 버튼 동작구현
 > Code
- ```
+ ```java
  protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
