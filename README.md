@@ -26,6 +26,19 @@
 ## onCreate()
 > Description
 - Permission체크 및 버튼 동작구현
+> Parameter
+- Bundle savedInstanceState 
+- https://doraeul.tistory.com/43 
+> Return
+- type:void
+- value:없음
+> Dependence function
+* if()
+  - LocationService 활성화/비활성화에 따라 메소드실행
+* onClick()
+  - gpsTracker변수에 객체넣기
+  - latitude,longitude변수에 위도,경도값을 넣기
+  - address변수에 현재위치주소 넣기
 > Code
  ```java
  protected void onCreate(Bundle savedInstanceState)
