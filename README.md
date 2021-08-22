@@ -204,3 +204,57 @@ void checkRunTimePermission(){
 
     }
 ```
+## public String getCurrentAddress()
+
+> Description
+- 지오코더 Gps를 주소로 변환
+> Parameter
+- double latitude, double longitude
+- 위도 경도
+> Return
+- type:String
+- value:지오코더 주소반환
+> Dependence function
+* try catch로 에러처리
+* geocoder https://developer.android.com/reference/android/location/Geocoder
+* List<Address> addresses 
+  - 이름이 지정된 위치를 설명하려고 시도하는 주소 배열을 반환함
+> Code
+
+```java
+ public String getCurrentAddress( double latitude, double longitude) {
+
+        //지오코더... GPS를 주소로 변환
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        List<Address> addresses;
+
+        try {
+
+            addresses = geocoder.getFromLocation(
+                    latitude,
+                    longitude,
+                    7);
+        } catch (IOException ioException) {
+            //네트워크 문제
+            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
+            return "지오코더 서비스 사용불가";
+        } catch (IllegalArgumentException illegalArgumentException) {
+            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+            return "잘못된 GPS 좌표";
+
+        }
+
+
+
+        if (addresses == null || addresses.size() == 0) {
+            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+            return "주소 미발견";
+
+        }
+
+        Address address = addresses.get(0);
+        return address.getAddressLine(0).toString()+"\n";
+
+    }
+```
