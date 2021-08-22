@@ -296,3 +296,44 @@ void checkRunTimePermission(){
         builder.create().show();
     }
   ```
+
+## onActivityResult()
+> Description
+- 
+> Parameter
+- requestCode
+  - ActivityForResult()를 시작하기 위해 원래 제공된 정수 요청 코드입니다.  
+- resultCode
+  - 하위 활동이 setResult()를 통해 반환한 정수 결과 코드입니다.
+- data
+  - 결과 데이터를 호출자에게 반환할 수 있습니다
+> Return
+- type: void
+- value:없음
+> Dependence function
+* https://developer.android.com/reference/android/app/Activity#onActivityResult(int,%20int,%20android.content.Intent)
+> Code
+  
+```java
+     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+
+            case GPS_ENABLE_REQUEST_CODE:
+
+                //사용자가 GPS 활성 시켰는지 검사
+                if (checkLocationServicesStatus()) {
+                    if (checkLocationServicesStatus()) {
+
+                        Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
+                        checkRunTimePermission();
+                        return;
+                    }
+                }
+
+                break;
+        }
+    }
+```
+  
