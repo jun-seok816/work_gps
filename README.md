@@ -369,3 +369,178 @@ void checkRunTimePermission(){
 
 }
   ```
+# GpsTracker Class
+> Description
+  - GpsTracker.java는 현재 위치를 가져와 주소로 변환하는 처리를 합니다. 
+
+> final Context mContext;
+  - 액티비티 정보를 얻어오는 변수
+> Location location;
+  - 위치
+> double latitude;
+  - 위도
+ > double longitude;
+   - 경도
+> MIN_DISTANCE_CHANGE_FOR_UPDATES
+  -  gps정보 업데이트 거리
+> MIN_TIME_BW_UPDATES
+  - gps정보 업데이트 시간
+> locationManager
+  - 위치관리자서비스 객체를 담을 변수
+
+## GpsTracker()
+> Description
+  - getLocation메소드 호출
+  - mContext변수 초기화
+> Parameter
+- context
+  - 액티비티 정보를 얻어오는 변수
+  - https://developer.android.com/reference/android/content/Context
+  - https://zxcv5500.tistory.com/258
+> Return
+- type: void
+- value:없음
+> Dependence function
+* getlocation()
+> Code
+  ```java
+      public GpsTracker(Context context) {
+        this.mContext = context;
+        getLocation();
+    }
+  ```
+## getLocation()
+> Description
+  - 위치를 리턴하는 메소드
+> Parameter
+  - 없음
+> Return
+- type: Location
+- value:위치
+> Dependence function
+  > getSystemService()
+    - 주어진 파라미터에 대응되는 안드로이드가 제공하는 시스템 서비스를 요청한다.
+    - https://developer.android.com/reference/android/content/Context#getSystemService(java.lang.String)
+  > locationManager.isProviderEnabled()
+    - 지정된 Provider의 Enabled/Disabled 상태를 Return합니다.
+    - https://developer.android.com/reference/android/location/LocationManager#isProviderEnabled(java.lang.String)
+> Code
+  ```java
+  public Location getLocation() {
+        try {
+            locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
+
+            boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            if (!isGPSEnabled && !isNetworkEnabled) {
+
+            } else {
+
+                int hasFineLocationPermission = ContextCompat.checkSelfPermission(mContext,
+                        Manifest.permission.ACCESS_FINE_LOCATION);
+                int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(mContext,
+                        Manifest.permission.ACCESS_COARSE_LOCATION);
+
+
+                if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                        hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
+
+                    ;
+                } else
+                    return null;
+
+
+                if (isNetworkEnabled) {
+
+
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+
+                    if (locationManager != null)
+                    {
+                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        if (location != null)
+                        {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                        }
+                    }
+                }
+
+
+                if (isGPSEnabled)
+                {
+                    if (location == null)
+                    {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                        if (locationManager != null)
+                        {
+                            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            if (location != null)
+                            {
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Log.d("@@@", ""+e.toString());
+        }
+
+        return location;
+    }
+  ```
+## getLatitude()
+  
+> Description
+  - 위도 변수 초기화
+  - MainActivity에서 불러올 함수
+> Parameter
+  - 없음
+> Return
+- type: double
+- value:위도 변수 리턴
+> Dependence function  
+  - location.getLatitude()
+  - 기기의 위도를 리턴
+> Code
+  ```java
+   public double getLatitude()
+    {
+        if(location != null)
+        {
+            latitude = location.getLatitude();
+        }
+
+        return latitude;
+    }
+  ```
+## getLongitude()
+> Description
+  - 경도 변수 초기화
+  - MainActivity에서 불러올 함수
+> Parameter
+  - 없음
+> Return
+- type: double
+- value:경도  변수 리턴
+> Dependence function  
+  - location.getLatitude()
+  - 기기의 경도를 리턴
+> Code
+  ```java
+     public double getLongitude()
+    {
+        if(location != null)
+        {
+            longitude = location.getLongitude();
+        }
+
+        return longitude;
+    }
+  ```
+  
