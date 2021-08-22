@@ -204,7 +204,7 @@ void checkRunTimePermission(){
 
     }
 ```
-## public String getCurrentAddress()
+## getCurrentAddress()
 
 > Description
 - 지오코더 Gps를 주소로 변환
@@ -259,20 +259,17 @@ void checkRunTimePermission(){
     }
 ```
   
-## private void showDialogForLocationServiceSetting()
+##showDialogForLocationServiceSetting()
+  
 > Description
-- 지오코더 Gps를 주소로 변환
+- 대화상자 세팅
 > Parameter
-- double latitude, double longitude
-- 위도 경도
+- 없음
 > Return
-- type:String
-- value:지오코더 주소반환
+- type: void
+- value:없음
 > Dependence function
-* try catch로 에러처리
-* geocoder https://developer.android.com/reference/android/location/Geocoder
-* List<Address> addresses 
-  - 이름이 지정된 위치를 설명하려고 시도하는 주소 배열을 반환함
+* https://developer.android.com/reference/android/app/AlertDialog.Builder
 > Code
   ```java
     private void showDialogForLocationServiceSetting() {
