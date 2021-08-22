@@ -264,7 +264,7 @@ void checkRunTimePermission(){
     }
 ```
   
-##showDialogForLocationServiceSetting()
+## showDialogForLocationServiceSetting()
   
 > Description
 - 대화상자 세팅
