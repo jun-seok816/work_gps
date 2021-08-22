@@ -84,6 +84,11 @@
 - android studio버전업했더니 빨간줄뜸 작동은잘됨
 > Parameter
 - int permsRequestCode 
+  - 전달된 요청 코드
+- @NonNull String[] permissions
+  - 요청 된 권한
+- @NonNull int[] grandResults
+  - 해당 권한에 대한 부여 결과
 - https://developer.android.com/training/permissions/requesting#java
 > Return
 - type:void
@@ -299,14 +304,15 @@ void checkRunTimePermission(){
 
 ## onActivityResult()
 > Description
-
+  - startActivityForResult메소드의 콜백 메소드
+  - https://developer.android.com/reference/android/app/Activity?hl=ko#onActivityResult(int,%20int,%20android.content.Intent)
 > Parameter
 - requestCode
-  - ActivityForResult()를 시작하기 위해 원래 제공된 정수 요청 코드입니다.  
+  - 대화상자 액티비티랑 MainActivity를 구별하기 위한 코드  
 - resultCode
-  - 하위 활동이 setResult()를 통해 반환한 정수 결과 코드입니다.
+  - 어떠한 결과코드를 주었는지에 대한 변수
 - data
-  - 결과 데이터를 호출자에게 반환할 수 있습니다
+  - 액티비티에서 보낸 결과 데이터가 들어가있는 부분
 > Return
 - type: void
 - value:없음
