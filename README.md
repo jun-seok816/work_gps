@@ -258,3 +258,44 @@ void checkRunTimePermission(){
 
     }
 ```
+  
+## private void showDialogForLocationServiceSetting()
+> Description
+- 지오코더 Gps를 주소로 변환
+> Parameter
+- double latitude, double longitude
+- 위도 경도
+> Return
+- type:String
+- value:지오코더 주소반환
+> Dependence function
+* try catch로 에러처리
+* geocoder https://developer.android.com/reference/android/location/Geocoder
+* List<Address> addresses 
+  - 이름이 지정된 위치를 설명하려고 시도하는 주소 배열을 반환함
+> Code
+  ```java
+    private void showDialogForLocationServiceSetting() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("위치 서비스 비활성화");
+        builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n"
+                + "위치 설정을 수정하실래요?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("설정", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                Intent callGPSSettingIntent
+                        = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        builder.create().show();
+    }
+  ```
