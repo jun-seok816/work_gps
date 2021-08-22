@@ -299,7 +299,7 @@ void checkRunTimePermission(){
 
 ## onActivityResult()
 > Description
-- 
+
 > Parameter
 - requestCode
   - ActivityForResult()를 시작하기 위해 원래 제공된 정수 요청 코드입니다.  
@@ -336,4 +336,30 @@ void checkRunTimePermission(){
         }
     }
 ```
-  
+## checkLocationServicesStatus()
+> Description
+- LocationManager 의 GPS_PRIVIDER 또는 NETWORK_PROVIDER 가 동작 중인지 확인하여 결과 값을 리턴한다.
+- LocationManager 개체 getSystemSerivce()를 이용하여 얻는다.
+> Parameter
+  - 없음
+> Return
+- type: boolean
+- value: GPS_PRIVIDER 또는 NETWORK_PROVIDER 가 Enable 이면 True, 아니면 False 값.
+> Dependence function
+* getSystemService()
+  - 주어진 파라미터에 대응되는 안드로이드가 제공하는 시스템 서비스를 요청한다.
+  - https://developer.android.com/reference/android/content/Context#getSystemService(java.lang.String)
+* locationManager.isProviderEnabled()
+  - 지정된 Provider의 Enabled/Disabled 상태를 Return합니다.
+  - https://developer.android.com/reference/android/location/LocationManager#isProviderEnabled(java.lang.String)
+> Code  
+  ```java
+  public boolean checkLocationServicesStatus() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+}
+  ```
