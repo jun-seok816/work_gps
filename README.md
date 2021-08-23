@@ -1,8 +1,19 @@
+# 안드로이드 GPS권한
+
+
+  ## 포그라운드 서비스
+   > 안드로이드 특성상 Activity는 한번에 하나 밖에 보여지지 않는데 이때 화면에 띄워진 Activity로 사용자가 입력한 명령을 해석하여 실행하고 그 결과를 화면에 출력해주는 대화식으로 작업을 수행하는 방식을 포그라운드 방식이라고 부른다  
+  ## 백그라운드 서비스
+  > 반대로 백그라운드 방식은 앞에서 포그라운드작업이 실행되는 동안 비동기적으로 다른 프로세스를 실행시켜서 작업하는 방식을 부른다
 # 사용된 서비스
-> location라는 포그라운드 서비스를 사용하여 앱이 기기의 현재 위치를 가져올 수 있게하였음
-  - 버튼을 클릭하면 위치 정보를 가져오기 위해 GpsTracker 서비스를 사용합니다. 
-  - 앱에서 ACCESS_COARSE_LOCATION 권한이나 ACCESS_FINE_LOCATION 권한을 요청하면 포그라운드 위치의 필요성을 선언합니다.
-  - https://developer.android.com/training/location/permissions?hl=ko#foreground
+  ## ACCESS_COARSE_LOCATION
+  - GPS 위성 신호를 통해 위치 정보를 제공합니다.
+   - 기기 위치 추정치를 약 1.6km 이내로 제공합니다.
+  ## ACCESS_FINE_LOCATION
+  - 네트워크 정보(Wi-Fi, 기지국 정보)를 이용하여 위치 정보를 제공합니다.
+   - ACCESS_FINE_LOCATION 권한을 요청하면 ACCESS_COARSE_LOCATION 권한도 요청해야 합니다. 단일 런타임 요청에 두 권한을 모두 포함해야 합니다. ACCESS_FINE_LOCATION만 요청하려고 하면 시스템이 요청을 무시하고 다음 오류 메시지를 Logcat에 기록합니다. 
+   - https://developer.android.com/about/versions/12/approximate-location?hl=ko
+
 ```java
 <manifest ... >
   <!-- To request foreground location access, declare one of these permissions. -->
@@ -15,7 +26,6 @@
 ## MainActivity
 > Description
 -MainActivity.java 파일에서는 위치 접근 권한과 GPS 사용 가능 여부를 체크해서 처리합니다. 
-
 
 ## MainActivity Class
 >private GpsTracker gpsTracker
