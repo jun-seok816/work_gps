@@ -1,3 +1,6 @@
+#사용된 서비스
+> location"라는 포그라운드 서비스를 사용하여 앱이 기기의 현재 위치를 가져올 수 있게하였음
+  - 
 # work_gps
 - GpsTracker
 ## MainActivity
@@ -5,6 +8,15 @@
 
 - MainActivity.java 파일에서는 위치 접근 권한과 GPS 사용 가능 여부를 체크해서 처리합니다. 
 - 버튼을 클릭하면 위치 정보를 가져오기 위해 GpsTracker 서비스를 사용합니다. 
+- 앱에서 ACCESS_COARSE_LOCATION 권한이나 ACCESS_FINE_LOCATION 권한을 요청하면 포그라운드 위치의 필요성을 선언합니다.
+https://developer.android.com/training/location/permissions?hl=ko#foreground
+```java
+<manifest ... >
+  <!-- To request foreground location access, declare one of these permissions. -->
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+</manifest>
+```
 
 ## MainActivity Class
 >private GpsTracker gpsTracker
