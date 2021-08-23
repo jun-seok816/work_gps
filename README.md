@@ -25,7 +25,7 @@
 - GpsTracker
 ## MainActivity
 > Description
--MainActivity.java 파일에서는 위치 접근 권한과 GPS 사용 가능 여부를 체크해서 처리합니다. 
+- MainActivity.java 파일에서는 위치 접근 권한과 GPS 사용 가능 여부를 체크해서 처리합니다. 
 
 ## MainActivity Class
 >private GpsTracker gpsTracker
