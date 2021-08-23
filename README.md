@@ -34,11 +34,11 @@
 
 >private static final int GPS_ENABLE_REQUEST_CODE = 2001;
 
-- 나중에
+- 
 
 >private static final int PERMISSIONS_REQUEST_CODE = 100;
 
-- 나중에
+- 
 
 >String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
 
